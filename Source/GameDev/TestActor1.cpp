@@ -15,8 +15,7 @@ void ATestActor1::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-	
+	AddTwoValues();
 }
 
 // Called every frame
@@ -26,21 +25,25 @@ void ATestActor1::Tick(float DeltaTime)
 
 }
 
-int32 ATestActor1::Add(int32 a, int32 b)
+int32 ATestActor1::AddTwoValues()
 {
 	// The first parameter is the log category, the second is the verbosity level, and the third is the message.
-	UE_LOG(LogTemp, Warning, TEXT("Add(int,int) Called"));
+	UE_LOG(LogTemp, Warning, TEXT("Add: %d + %d = %d"), value1, value2, value1 + value2);
 
+	// value1 and value2's values are taken from the editor.
+	// when called, does whatever modules are attached to it in the blueprint.
+	OnAddBlueprint(value1, value2, value1 + value2);
 
-	OnAddBlueprint(a, b, a + b); // when called, does whatever modules are attached to it in the blueprint.
+	// Call the function <func name>_implementation.
+	
+	OnAddNative(value1, value2, value1 + value2); 
 
-
-	OnAddNative(a, b, a + b); // Call the function <func name>_implementation.
-
-
-	return a + b;
+	return value1 + value2;
 }
 
+// Keep in mind that should this function be overriden in a blueprint, 
+// the blueprint's implementation will be called with whatever values are set inside the blueprint.
+// Make the necessary node connections then, to ensure that the correct values are passed.
 void ATestActor1::OnAddNative_Implementation(int32 valueA, int32 valueB, int32 result)
 {
 	// -1 means that the message will not be removed automatically.

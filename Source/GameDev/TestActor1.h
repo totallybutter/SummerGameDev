@@ -22,15 +22,16 @@ public:
 		BUF: The property is a bitfield.
 		Category: The category of the property in the editor. This is used to group properties together in the editor.
 	*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, Category = "Test") int32 value1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient, Category = "Test") int32 value2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test") int32 value1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test") int32 value2;
 	
-	UFUNCTION(BlueprintCallable, Category = "Test") int32 Add(int32 valueA, int32 valueB);
+	UFUNCTION(BlueprintCallable, Category = "Test") int32 AddTwoValues();
 	UFUNCTION(BlueprintImplementableEvent, Category = "Test") void OnAddBlueprint(int32 valueA, int32 valueB, int32 result);
 
 	// Do not directly implement this function with the exact name in the .cpp file
 	// Add the _Implementation suffix to the function name before implementing it
 	UFUNCTION(BlueprintNativeEvent, Category = "Test") void OnAddNative(int32 valueA, int32 valueB, int32 result);
+	virtual void OnAddNative_Implementation(int32 valueA, int32 valueB, int32 result);
 
 protected:
 	// Called when the game starts or when spawned
