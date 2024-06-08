@@ -24,6 +24,8 @@ public:
 	*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test") int32 value1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test") int32 value2;
+	// key that when pressed will call the function
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test") FKey addKey;
 	
 	UFUNCTION(BlueprintCallable, Category = "Test") int32 AddTwoValues();
 	UFUNCTION(BlueprintImplementableEvent, Category = "Test") void OnAddBlueprint(int32 valueA, int32 valueB, int32 result);

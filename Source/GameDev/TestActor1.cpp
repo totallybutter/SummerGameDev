@@ -7,7 +7,7 @@ ATestActor1::ATestActor1()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	value1 = value2 = 0;
+	value1 = value2 = 0; addKey = EKeys::P;
 }
 
 // Called when the game starts or when spawned
@@ -23,6 +23,17 @@ void ATestActor1::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	// if player presses the 'P' key (no holding down), the values will be added again.
+	if (GetWorld()->GetFirstPlayerController()->WasInputKeyJustPressed(addKey))
+	{
+		AddTwoValues();
+		FString keyName = addKey.ToString();
+		UE_LOG(LogTemp, Display, TEXT("Key %s was pressed."), *keyName);
+		// The following code will print the key name to the screen.
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green,
+			FString::Printf(TEXT("Key %s was pressed."), *keyName));
+	}
 }
 
 int32 ATestActor1::AddTwoValues()
@@ -51,7 +62,7 @@ void ATestActor1::OnAddNative_Implementation(int32 valueA, int32 valueB, int32 r
 	// FColor::Red is the color of the message.
 	// FString::Printf is a function that works like printf in C++.
 	// The TEXT macro is used to convert the string to a TCHAR.
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, 
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, 
 		FString::Printf(TEXT("OnAddNative: %d + %d = %d"), valueA, valueB, result));
 
 	// UE_LOG(LogTemp, Warning, TEXT("OnAddNative: %d + %d = %d"), valueA, valueB, result);
