@@ -1,0 +1,24 @@
+Minigame Flow
+(6) Washing Machine:
+
+1 - Find dirty clothes around house
+2 - Load dirty clothes into washing machine
+3 - Get laundry detergent bottle
+4 - Pouring Minigame: Pour just the right amount of detergent
+       (too little: adbfisbdgfdsikgfsgbds maybe disallow too little detergent?)
+       (too much: will still clean clothes, but less detergent will be available for future loads)
+5 - Begin washing machine, timer will show how long until completion
+6 - Once complete, washed clothes will be ‘pooped’ onto floor.
+
+2 main objects needed:
+dirty clothes bundle
+washing machine
+
+dirty clothes bundle needs:
+- sit there in the world until picked up
+- player has 1 inventory slot (their hands) 
+- be dropped into washing machine
+
+washing machine needs:
+- to have clothes in it before starting
+- 
